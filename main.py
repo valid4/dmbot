@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.utils.emoji import emojize
+#from aiogram.utils.emoji import emojize
 from dotenv import load_dotenv
 import os
 
@@ -34,8 +34,8 @@ async def cmd_start(message: types.Message):
     await message.answer(f'Hello',
                          reply_markup=kb)
     await message.answer_sticker('CAACAgIAAxkBAANiZMWs_AIftFJRdkKg-ansP-gaX2MAArwXAAKpXxBKpt0jX0Tfm_IvBA')
-    '''if message.from_user.id == int(os.getenv(('ADMIN_ID'))):
-        await message.answer('Вы вошли как администратор', reply_markup=kb_adm)'''
+    if message.from_user.id == int(os.getenv(('ADMIN_ID'))) or message.from_user.id == int(os.getenv(('ADMIN_ID2'))):
+        await message.answer('Вы вошли как администратор', reply_markup=kb_adm)
 
 @dp.message_handler(text='Записаться')
 async def enroll(message: types.Message):
@@ -59,7 +59,7 @@ async def reference(message: types.Message):
 
 @dp.message_handler(text='Admin_Panel')
 async def admpanel(message: types.Message):
-    if message.from_user.id == int(os.getenv(('ADMIN_ID'))):
+    if message.from_user.id == int(os.getenv(('ADMIN_ID'))) or message.from_user.id == int(os.getenv(('ADMIN_ID2'))):
         await message.answer(f'Вы вошли в админ панель', reply_markup=admin_panel)
     else:
         await message.reply('К сожалению, данной команды нет в списке. Выберите из списка')
